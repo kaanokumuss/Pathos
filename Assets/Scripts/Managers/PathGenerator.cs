@@ -18,7 +18,7 @@ public class PathGenerator : MonoBehaviour
     private  int cubeCount= 0;
 
 
-    private void Start()
+    private void Awake()
     {
         GenerateDefaultPath();
     }
