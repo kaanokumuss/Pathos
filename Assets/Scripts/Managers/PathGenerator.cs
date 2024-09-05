@@ -40,9 +40,19 @@ public class PathGenerator : MonoBehaviour
        
     }
 
+    public void GeneratePathOnTouch(Vector3 touchPosition)
+    {
+        currentPosition = lastCube.position + currentDirection * cubeSpacing;
+
+        lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity).transform;
+        cubeCount++;
+
+        HandleTurns();
+    }
+
     void HandleTurns()
     {
-        if (cubeCount % UnityHelpers.GetRandomIntInRange(3, 5) == 0)
+        if (cubeCount % UnityHelpers.GetRandomIntInRange(3, 6) == 0)
         {
             if (isFirstTurn)
             {
