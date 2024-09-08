@@ -3,10 +3,11 @@ using UnityEngine;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using UnityEngine.UI;
 
 public class Sphere : MonoBehaviour
 {
-    [SerializeField] private GameObject failPanel;
+    [SerializeField] private GameObject pressSpace;    
     [SerializeField] private PathGenerator pathGenerator;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] private float destroyCubeSeconds = 0;
@@ -18,15 +19,25 @@ public class Sphere : MonoBehaviour
 
     private CancellationTokenSource cancellationTokenSource;
 
+    private bool isGameStarted = false; 
+
     void Update()
     {
-        SphereMovement();
+        if (!isGameStarted)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                pressSpace.SetActive(false);
+                isGameStarted = true;
+            }
+        }
+        else
+        {
+            SphereMovement();
+        }
     }
 
-    void FixedUpdate()
-    {
-        Fail();
-    }
+    
 
     private void SphereMovement()
     {
@@ -81,13 +92,5 @@ public class Sphere : MonoBehaviour
         }
     }
 
-
-    private void Fail()
-    {
-        if (transform.position.y < -3)
-        {
-            failPanel.SetActive(true);
-            Time.timeScale = 0f;
-        }
-    }
+   
 }
