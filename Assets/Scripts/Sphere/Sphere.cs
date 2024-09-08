@@ -55,7 +55,7 @@ public class Sphere : MonoBehaviour
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(delayBeforeDestroy), cancellationToken: token);
 
-                float fallDistance = 1f;
+                float fallDistance = 0.5f;
                 Vector3 initialPosition = collidedObject.transform.position;
                 Vector3 targetPosition = initialPosition - new Vector3(0, fallDistance, 0);
 
