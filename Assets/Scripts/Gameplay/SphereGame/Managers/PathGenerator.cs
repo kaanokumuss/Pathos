@@ -4,7 +4,7 @@ using UnityEngine;
 public class PathGenerator : MonoBehaviour
 {
     [SerializeField] private GameObject cubePrefab;
-    [SerializeField] private Transform pathParent; // Parent transform
+    [SerializeField] private Transform pathParent;
 
     private float cubeSpacing = 1f;
     private int defaultCubes = 70;
@@ -14,6 +14,16 @@ public class PathGenerator : MonoBehaviour
     private Transform lastCube;
     private bool isFirstTurn = true;
     private int cubeCount = 0;
+
+    private void Start()
+    {
+        GameEvents.CorrectAnswerCounter += GeneratePathByCorrectAnswer;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.CorrectAnswerCounter -= GeneratePathByCorrectAnswer;
+    }
 
     public void GenerateDefaultPath()
     {
@@ -40,7 +50,7 @@ public class PathGenerator : MonoBehaviour
         HandleTurns();
     }
 
-    void HandleTurns()
+    private void HandleTurns()
     {
         if (cubeCount % UnityHelpers.GetRandomIntInRange(3, 6) == 0)
         {
@@ -65,5 +75,35 @@ public class PathGenerator : MonoBehaviour
     private void Turn90Degrees()
     {
         currentDirection = Quaternion.Euler(0, 90, 0) * currentDirection;
+    }
+
+    public void GeneratePathByCorrectAnswer(int correctAnswer)
+    {
+        cubeSpacing = correctAnswer;
+        switch (correctAnswer)
+        {
+            case 1:
+                cubePrefab.transform.localScale = new Vector3(1, 1, 1);
+                break;
+
+            case 2:
+                cubePrefab.transform.localScale = new Vector3(2, 1, 2);
+                break;
+
+            case 3:
+                cubePrefab.transform.localScale = new Vector3(3, 1, 3);
+                break;
+
+            case 4:
+                cubePrefab.transform.localScale = new Vector3(4, 1, 4);
+                break;
+            case 5:
+                cubePrefab.transform.localScale = new Vector3(5, 1, 5);
+                break;
+
+            default:
+                Debug.LogError("Invalid correctAnswer value. Must be 1, 2, 3, or 4.");
+                break;
+        }
     }
 }
