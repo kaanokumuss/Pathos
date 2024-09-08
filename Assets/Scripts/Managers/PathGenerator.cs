@@ -22,14 +22,14 @@ public class PathGenerator : MonoBehaviour
 
     private void GenerateDefaultPath()
     {
-        lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity, pathParent).transform; 
+        lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity, pathParent).transform;
         cubeCount++;
 
         for (int i = 0; i < defaultCubes; i++)
         {
             currentPosition = lastCube.position + currentDirection * cubeSpacing;
 
-            lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity, pathParent).transform; 
+            lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity, pathParent).transform;
             cubeCount++;
             HandleTurns();
         }
@@ -39,7 +39,7 @@ public class PathGenerator : MonoBehaviour
     {
         currentPosition = lastCube.position + currentDirection * cubeSpacing;
 
-        lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity, pathParent).transform; 
+        lastCube = Instantiate(cubePrefab, currentPosition, Quaternion.identity, pathParent).transform;
         cubeCount++;
 
         HandleTurns();

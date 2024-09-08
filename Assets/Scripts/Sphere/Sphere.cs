@@ -1,25 +1,31 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
-using Cysharp.Threading.Tasks; 
+using Cysharp.Threading.Tasks;
 using System.Threading;
 
 public class Sphere : MonoBehaviour
 {
+    [SerializeField] private GameObject failPanel;
     [SerializeField] private PathGenerator pathGenerator;
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] private float destroyCubeSeconds = 1f;
-    [SerializeField] private float delayBeforeDestroy = 1.5f;
+    [SerializeField] private float destroyCubeSeconds = 0;
+    [SerializeField] private float delayBeforeDestroy = 1f;
     private float turnAngle90 = 90f;
     private float turnAngle270 = 270f;
     private Vector3 moveDirection = Vector3.forward;
     private bool turnAngleIs90 = true;
 
-    private CancellationTokenSource cancellationTokenSource;  
+    private CancellationTokenSource cancellationTokenSource;
 
     void Update()
     {
         SphereMovement();
+    }
+
+    void FixedUpdate()
+    {
+        Fail();
     }
 
     private void SphereMovement()
@@ -49,8 +55,7 @@ public class Sphere : MonoBehaviour
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(delayBeforeDestroy), cancellationToken: token);
 
-                // Objeyi yukarıdan aşağıya düşürme
-                float fallDistance = 5f; // Objelerin ne kadar yükseklikten düşeceğini ayarlayın
+                float fallDistance = 1f;
                 Vector3 initialPosition = collidedObject.transform.position;
                 Vector3 targetPosition = initialPosition - new Vector3(0, fallDistance, 0);
 
@@ -58,7 +63,6 @@ public class Sphere : MonoBehaviour
                     .SetEase(Ease.InBack)
                     .OnComplete(() =>
                     {
-                        // Objeyi küçültme ve ardından yok etme
                         collidedObject.transform.DOScale(Vector3.zero, 0.5f)
                             .SetEase(Ease.InBack)
                             .OnComplete(() =>
@@ -77,12 +81,13 @@ public class Sphere : MonoBehaviour
         }
     }
 
-    public void CancelDestroy()
+
+    private void Fail()
     {
-        if (cancellationTokenSource != null)
+        if (transform.position.y < -3)
         {
-            cancellationTokenSource.Cancel();  
-            cancellationTokenSource.Dispose();
+            failPanel.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 }
