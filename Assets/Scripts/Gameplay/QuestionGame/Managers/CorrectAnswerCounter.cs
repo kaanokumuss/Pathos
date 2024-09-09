@@ -17,7 +17,7 @@ public class CorrectAnswerCounter : MonoBehaviour
     {
         if (progressText != null)
         {
-            progressText.text = $"{correctAnswersCount}/{totalQuestions}";
+            progressText.text = $"{correctAnswersCount} / {totalQuestions}";
         }
     }
 }
