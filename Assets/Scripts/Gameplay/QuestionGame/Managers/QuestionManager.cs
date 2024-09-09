@@ -8,6 +8,7 @@ public class QuestionManager : MonoBehaviour
 {
     [SerializeField] private QuestionDataSO questionData;
     [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private TextMeshProUGUI questionNumberTextMesh; // Yeni TextMeshPro objesi
     [SerializeField] private QuestionShaker questionShaker;
     [SerializeField] private CorrectAnswerCounter correctAnswerCounter;
     public Button[] optionsButtons;
@@ -38,7 +39,9 @@ public class QuestionManager : MonoBehaviour
                 QuestionDataSO.Question currentQuestion = questionData.questions[questionIndex];
 
                 string questionNumberText = $"Soru {currentQuestionIndex + 1}:";
-                questionText.text = $"{questionNumberText}\n{currentQuestion.question}";
+                questionNumberTextMesh.text = questionNumberText; // Sorunun numarasını ayrı bir TextMeshPro objesine yazdır
+
+                questionText.text = currentQuestion.question;
 
                 if (correctAnswerCounter != null)
                 {
@@ -97,7 +100,6 @@ public class QuestionManager : MonoBehaviour
             isAnswering = false;
         });
     }
-
 
     void ResetButtonColors()
     {
