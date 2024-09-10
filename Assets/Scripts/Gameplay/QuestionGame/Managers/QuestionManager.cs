@@ -3,27 +3,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;  // Make sure to include this for DOTween animations
 
 public class QuestionManager : MonoBehaviour
 {
     [SerializeField] private QuestionDataSO questionData;
     [SerializeField] private TextMeshProUGUI questionText;
-    [SerializeField] private TextMeshProUGUI questionNumberTextMesh;
+    [SerializeField] private TextMeshProUGUI questionNumberTextMesh; // Yeni TextMeshPro objesi
     [SerializeField] private QuestionShaker questionShaker;
     [SerializeField] private CorrectAnswerCounter correctAnswerCounter;
     public Button[] optionsButtons;
     [SerializeField] private GameObject questionPanel;
-
     private List<int> shuffledIndices;
     public int currentQuestionIndex = 0;
+
     private int correctAnswersCount = 0;
     private const int totalQuestions = 5;
     private bool isAnswering = false;
-
-    // Animation settings
-    [SerializeField] private float fadeOutDuration = 1f;
-    [SerializeField] private Vector3 scaleDownTarget = new Vector3(0, 0, 0); // Target scale when fading out
 
     void Start()
     {
@@ -44,7 +39,7 @@ public class QuestionManager : MonoBehaviour
                 QuestionDataSO.Question currentQuestion = questionData.questions[questionIndex];
 
                 string questionNumberText = $"Soru {currentQuestionIndex + 1}:";
-                questionNumberTextMesh.text = questionNumberText;
+                questionNumberTextMesh.text = questionNumberText; // Sorunun numarasını ayrı bir TextMeshPro objesine yazdır
 
                 questionText.text = currentQuestion.question;
 
@@ -91,7 +86,7 @@ public class QuestionManager : MonoBehaviour
         {
             Debug.Log("Correct Answer!");
             optionsButtons[selectedIndex].GetComponent<Image>().color = Color.green;
-            correctAnswersCount++;
+            correctAnswersCount++; // Correct answer, increment count
         }
         else
         {
@@ -147,22 +142,12 @@ public class QuestionManager : MonoBehaviour
         if (questionPanel != null)
         {
             GameEvents.CorrectAnswerCounter?.Invoke(GetCorrectAnswersCount());
-            // Animate the panel before hiding it
-            AnimateAndClosePanel();
+            questionPanel.SetActive(false);
         }
         else
         {
             Debug.LogError("QuestionPanel is not assigned.");
         }
-    }
-
-    void AnimateAndClosePanel()
-    {
-        // Fade and scale down the panel
-        questionPanel.transform.DOScale(scaleDownTarget, fadeOutDuration).SetEase(Ease.InBack).OnComplete(() =>
-        {
-            questionPanel.SetActive(false); // Deactivate the panel after the animation completes
-        });
     }
 
     public int GetCorrectAnswersCount()

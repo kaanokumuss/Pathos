@@ -83,8 +83,8 @@ public class PathGenerator : MonoBehaviour
         switch (correctAnswer)
         {
             case 0:
-                cubePrefab.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                cubeSpacing = 0.5f;
+                cubePrefab.transform.localScale = new Vector3(0.7f, 1, 0.7f);
+                cubeSpacing = 0.7f;
                 break;
             case 1:
                 cubePrefab.transform.localScale = new Vector3(1, 1, 1);
@@ -93,25 +93,25 @@ public class PathGenerator : MonoBehaviour
                 break;
 
             case 2:
-                cubePrefab.transform.localScale = new Vector3(1.5f, 1, 1.5f);
-                cubeSpacing = 1.5f;
+                cubePrefab.transform.localScale = new Vector3(1.3f, 1, 1.3f);
+                cubeSpacing = 1.3f;
 
                 break;
 
             case 3:
-                cubePrefab.transform.localScale = new Vector3(2, 1, 2);
-                cubeSpacing =2;
+                cubePrefab.transform.localScale = new Vector3(1.6f, 1, 1.6f);
+                cubeSpacing =1.6f;
 
                 break;
 
             case 4:
-                cubePrefab.transform.localScale = new Vector3(2.5f, 1, 2.5f);
-                cubeSpacing = 2.5f;
+                cubePrefab.transform.localScale = new Vector3(1.9f, 1, 1.9f);
+                cubeSpacing = 1.9f;
 
                 break;
             case 5:
-                cubePrefab.transform.localScale = new Vector3(3, 1, 3);
-                cubeSpacing = 3;
+                cubePrefab.transform.localScale = new Vector3(2.2f, 1, 2.2f);
+                cubeSpacing = 2.2f;
 
                 break;
 
