@@ -16,7 +16,6 @@ public class QuestionManager : MonoBehaviour
     public Button[] optionsButtons;
     [SerializeField] private GameObject questionPanel;
     [SerializeField] private AudioSource audioSource; // Referansını ekle
-    [SerializeField] private AudioClip buttonClickSound; // Oynatmak istediğiniz sesi tanımlayın
     private List<int> shuffledIndices;
     public int currentQuestionIndex = 0;
 
@@ -84,9 +83,9 @@ public class QuestionManager : MonoBehaviour
 
     void PlayButtonClickSound()
     {
-        if (audioSource != null && buttonClickSound != null)
+        if (audioSource != null )
         {
-            audioSource.PlayOneShot(buttonClickSound); // Sesi çal
+            audioSource.Play();
         }
     }
 

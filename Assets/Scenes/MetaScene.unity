@@ -793,6 +793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 537798469}
   - component: {fileID: 537798470}
+  - component: {fileID: 537798471}
   m_Layer: 0
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -828,6 +829,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537798468}
   m_CullTransparentMesh: 1
+--- !u!114 &537798471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537798468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9a670f59bb32243bd6e1be098f02f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8f83dbc7e4b4e154583d539d7ad3d6bb, type: 2}
 --- !u!1 &582911048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,13 +1239,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 934784765}
   m_HandleRect: {fileID: 1595532236}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 537798471}
+        m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &687630576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,7 +2254,8 @@ AudioSource:
   m_GameObject: {fileID: 1391275120}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8f83dbc7e4b4e154583d539d7ad3d6bb,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a90f4a89a98aacf4d85aaee8ed55e1f5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.074

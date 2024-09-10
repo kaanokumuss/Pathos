@@ -729,7 +729,6 @@ MonoBehaviour:
   - {fileID: 782638221}
   questionPanel: {fileID: 881595846}
   audioSource: {fileID: 1672531155}
-  buttonClickSound: {fileID: 8300000, guid: a90f4a89a98aacf4d85aaee8ed55e1f5, type: 3}
   currentQuestionIndex: 0
 --- !u!1 &410087039
 GameObject:
@@ -3563,7 +3562,8 @@ AudioSource:
   m_GameObject: {fileID: 1672531153}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8f83dbc7e4b4e154583d539d7ad3d6bb,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a90f4a89a98aacf4d85aaee8ed55e1f5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3723,7 +3723,8 @@ AudioSource:
   m_GameObject: {fileID: 1789143167}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8f83dbc7e4b4e154583d539d7ad3d6bb,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ee47707678d14784288fe4949a55a792, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
