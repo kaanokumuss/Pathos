@@ -1,10 +1,8 @@
-
 using System;
 using UnityEngine;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using UnityEngine.UI;
 
 public class Sphere : MonoBehaviour
 {
@@ -26,7 +24,7 @@ public class Sphere : MonoBehaviour
     {
         if (!isGameStarted)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0)) // Sol fare tıklamasıyla başlat
             {
                 pressSpace.SetActive(false);
                 isGameStarted = true;
@@ -42,7 +40,7 @@ public class Sphere : MonoBehaviour
     {
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0)) // Sol fare tıklamasıyla yön değiştir
         {
             float angle = turnAngleIs90 ? turnAngle90 : turnAngle270;
             moveDirection = Quaternion.Euler(0, angle, 0) * moveDirection;
@@ -90,6 +88,5 @@ public class Sphere : MonoBehaviour
             }
         }
     }
-
-   
 }
+
