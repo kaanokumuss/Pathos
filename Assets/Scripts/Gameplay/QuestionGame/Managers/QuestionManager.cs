@@ -6,6 +6,8 @@ using Cysharp.Threading.Tasks;
 
 public class QuestionManager : MonoBehaviour
 {
+    [SerializeField] private GameObject gameplay;
+    [SerializeField] private GameObject pressSpaceToStart;
     [SerializeField] private QuestionDataSO questionData;
     [SerializeField] private TextMeshProUGUI questionText;
     [SerializeField] private TextMeshProUGUI questionNumberTextMesh; // Yeni TextMeshPro objesi
@@ -26,6 +28,8 @@ public class QuestionManager : MonoBehaviour
         {
             shuffledIndices = questionShaker.ShuffleQuestions(questionData.questions.Count);
             DisplayQuestion();
+            gameplay.SetActive(false);
+            pressSpaceToStart.SetActive(false);
         }
     }
 
@@ -39,7 +43,7 @@ public class QuestionManager : MonoBehaviour
                 QuestionDataSO.Question currentQuestion = questionData.questions[questionIndex];
 
                 string questionNumberText = $"Soru {currentQuestionIndex + 1}:";
-                questionNumberTextMesh.text = questionNumberText; // Sorunun numarasını ayrı bir TextMeshPro objesine yazdır
+                questionNumberTextMesh.text = questionNumberText;
 
                 questionText.text = currentQuestion.question;
 
@@ -58,10 +62,7 @@ public class QuestionManager : MonoBehaviour
                     optionsButtons[i].onClick.RemoveAllListeners();
 
                     string correctAnswer = currentQuestion.correctAnswer;
-                    optionsButtons[i].onClick.AddListener(() =>
-                    {
-                        CheckAnswer(optionIndex, correctAnswer);
-                    });
+                    optionsButtons[i].onClick.AddListener(() => { CheckAnswer(optionIndex, correctAnswer); });
                 }
             }
             else
@@ -86,7 +87,7 @@ public class QuestionManager : MonoBehaviour
         {
             Debug.Log("Correct Answer!");
             optionsButtons[selectedIndex].GetComponent<Image>().color = Color.green;
-            correctAnswersCount++; // Correct answer, increment count
+            correctAnswersCount++; 
         }
         else
         {
@@ -95,7 +96,8 @@ public class QuestionManager : MonoBehaviour
         }
 
         SetButtonsInteractable(false);
-        UniTask.Delay(2000).ContinueWith(() => {
+        UniTask.Delay(2000).ContinueWith(() =>
+        {
             NextQuestion();
             isAnswering = false;
         });
@@ -128,6 +130,9 @@ public class QuestionManager : MonoBehaviour
             }
             else
             {
+                pressSpaceToStart.SetActive(true);
+
+                gameplay.SetActive(true);
                 EndQuiz();
             }
         }
