@@ -38,8 +38,6 @@ public class Sphere : MonoBehaviour
         }
     }
 
-    
-
     private void SphereMovement()
     {
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
