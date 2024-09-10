@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuitButton : MonoBehaviour
+public class SettingsButton: MonoBehaviour
 {
+    [SerializeField] private GameObject settingsPanel;
     public Button quitButton;
 
     void OnEnable()
@@ -21,6 +22,6 @@ public class QuitButton : MonoBehaviour
 
     void OnClick()
     {
-        Application.Quit();
+        settingsPanel.SetActive(true);
     }
 }
