@@ -15,6 +15,8 @@ public class QuestionManager : MonoBehaviour
     [SerializeField] private CorrectAnswerCounter correctAnswerCounter;
     public Button[] optionsButtons;
     [SerializeField] private GameObject questionPanel;
+    [SerializeField] private AudioSource audioSource; // Referansını ekle
+    [SerializeField] private AudioClip buttonClickSound; // Oynatmak istediğiniz sesi tanımlayın
     private List<int> shuffledIndices;
     public int currentQuestionIndex = 0;
 
@@ -62,7 +64,11 @@ public class QuestionManager : MonoBehaviour
                     optionsButtons[i].onClick.RemoveAllListeners();
 
                     string correctAnswer = currentQuestion.correctAnswer;
-                    optionsButtons[i].onClick.AddListener(() => { CheckAnswer(optionIndex, correctAnswer); });
+                    optionsButtons[i].onClick.AddListener(() => 
+                    { 
+                        PlayButtonClickSound(); // Ses oynatma çağrısı
+                        CheckAnswer(optionIndex, correctAnswer); 
+                    });
                 }
             }
             else
@@ -76,7 +82,15 @@ public class QuestionManager : MonoBehaviour
         }
     }
 
-    void CheckAnswer(int selectedIndex, string correctAnswer)
+    void PlayButtonClickSound()
+    {
+        if (audioSource != null && buttonClickSound != null)
+        {
+            audioSource.PlayOneShot(buttonClickSound); // Sesi çal
+        }
+    }
+
+    async void CheckAnswer(int selectedIndex, string correctAnswer)
     {
         if (isAnswering) return;
 
@@ -96,11 +110,10 @@ public class QuestionManager : MonoBehaviour
         }
 
         SetButtonsInteractable(false);
-        UniTask.Delay(2000).ContinueWith(() =>
-        {
-            NextQuestion();
-            isAnswering = false;
-        });
+
+        await UniTask.Delay(2000); // Asenkron bekleme
+        NextQuestion();
+        isAnswering = false;
     }
 
     void ResetButtonColors()
@@ -131,7 +144,6 @@ public class QuestionManager : MonoBehaviour
             else
             {
                 pressSpaceToStart.SetActive(true);
-
                 gameplay.SetActive(true);
                 EndQuiz();
             }

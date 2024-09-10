@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayButton : MonoBehaviour
 {
+    [SerializeField] private AudioSource clickButton;
     [SerializeField] Button button;
     
     void OnEnable()
@@ -20,7 +21,8 @@ public class PlayButton : MonoBehaviour
     
 
     void OnClick()
-    {
+    { 
+        clickButton.Play();
        SceneEvents.OnLoadGameScene?.Invoke();
     }
 

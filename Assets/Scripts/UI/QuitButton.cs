@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class QuitButton : MonoBehaviour
 {
+    [SerializeField] private AudioSource clickButton;
     public Button quitButton;
 
     void OnEnable()
@@ -21,6 +22,7 @@ public class QuitButton : MonoBehaviour
 
     void OnClick()
     {
+        clickButton.Play();
         Application.Quit();
     }
 }
